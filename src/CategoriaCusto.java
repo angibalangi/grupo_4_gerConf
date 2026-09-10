@@ -1,0 +1,1 @@
+public enum CategoriaCusto { AQUISICAO_DE_BENS, MANUTENCAO_DE_BENS, OUTROS_SERVICOS }
