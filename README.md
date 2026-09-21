@@ -8,3 +8,4 @@
 * João Paulo Reis de Melo Ramos;
 * João Pedro Marques Rogoski;
 * Cauã Souza Alves;
+* João Gabriel Franken Nastari
