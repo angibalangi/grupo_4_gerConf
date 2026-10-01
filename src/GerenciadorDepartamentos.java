@@ -21,6 +21,7 @@ public class GerenciadorDepartamentos {
         this.departamentos.add(d);
     }
 
+    // isso aqui retorna null quando n acha
     public Departamento buscarPorNome(String nome) {
         for (Departamento d : this.departamentos) {
             if (d.getNome().equalsIgnoreCase(nome)) {
