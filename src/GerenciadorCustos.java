@@ -3,12 +3,13 @@ import java.util.Collections;
 
 public class GerenciadorCustos {
     private ArrayList<Custo> custos;
+
     public GerenciadorCustos(){
         custos = new ArrayList<>();
     }
 
-    public void adicionarCusto(CategoriaCusto categoria, Departamento departamentoAssociado, String custo, String data){
-        Custo c = new Custo(categoria, departamentoAssociado, custo, data);
+    public void adicionarCusto(CategoriaCusto categoria, Departamento departamentoAssociado, String custo, String data, String descricao, Funcionario funcionario){
+        Custo c = new Custo(categoria, departamentoAssociado, custo, data, descricao, funcionario);
         custos.add(c);
     }
 
@@ -16,11 +17,13 @@ public class GerenciadorCustos {
 
     public ArrayList<Custo> pesquisaPorData(String dataInformada){
         ArrayList<Custo> custosEncontrados = new ArrayList<>();
+
         for (Custo c : custos){
             if (c.getDataAsString().contains(dataInformada)){
                 custosEncontrados.add(c);
             }
         }
+
         return custosEncontrados;
     }
 
@@ -31,10 +34,12 @@ public class GerenciadorCustos {
     @Override
     public String toString(){
         StringBuilder sb = new StringBuilder();
+
         for (Custo c : custos){
             sb.append(c.toString());
             sb.append("\n");
         }
+
         return sb.toString();
     }
 }
