@@ -11,6 +11,20 @@ public class GerenciadorCustos {
     public void adicionarCusto(CategoriaCusto categoria, Departamento departamentoAssociado, String custo, String data, String descricao, Funcionario funcionario){
         Custo c = new Custo(categoria, departamentoAssociado, custo, data, descricao, funcionario);
         custos.add(c);
+
+    }
+    
+    //Pesquisa os custos por Descrição - S05T05
+    public ArrayList<Custo> pesquisaPorDescricao(String descricao){
+        ArrayList<Custo> custos = new ArrayList<>();
+
+        for (Custo c : custos){
+            if (c.getDescricao.equals(descricao)) {
+                custos.add(c);
+            }
+        }
+
+        return custos;
     }
 
     /* Metodo abaixo so aceita datas no formato dd/MM/yyyy, senao nao vai funcionar!! (data incompleta tbm funciona) */
