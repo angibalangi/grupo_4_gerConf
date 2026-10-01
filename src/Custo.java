@@ -7,6 +7,8 @@ public class Custo implements Comparable<Custo>{
     private Departamento departamentoAssociado;
     private BigDecimal custo;
     private LocalDate data;
+    private String descricao;
+    private Funcionario funcionario;
 
     /* A linha debaixo diz qual o formato aceito qndo for informar a data do custo. Outro formato nao vai funcionar
     se nao mudar!! Se for fazer scanner, recomendo pedir o dia, mes e ano separado, depois juntar com stringbuilder */
@@ -16,11 +18,18 @@ public class Custo implements Comparable<Custo>{
     /* Usei BigDecimal por ser dinheiro, e coloquei a entrada como String pois imagino ser
     mais facil doq ter que criar um BigDecimal toda vez, mas posso estar errado - Angelo */
 
-    public Custo(CategoriaCusto categoria, Departamento departamentoAssociado, String custo, String data){
+    public Custo(CategoriaCusto categoria,
+                 Departamento departamentoAssociado,
+                 String custo,
+                 String data,
+                 String descricao,
+                 Funcionario funcionario){
         this.categoria = categoria;
         this.departamentoAssociado = departamentoAssociado;
         this.custo = new BigDecimal(custo);
-        this.data = LocalDate.parse(data,dataFormato);
+        this.data = LocalDate.parse(data, dataFormato);
+        this.descricao = descricao;
+        this.funcionario = funcionario;
     }
 
     public CategoriaCusto getCategoria(){
@@ -35,17 +44,32 @@ public class Custo implements Comparable<Custo>{
         return this.custo;
     }
 
-    public LocalDate getData() { return this.data; }
+    public LocalDate getData() {
+        return this.data;
+    }
 
-    public String getDataAsString() { return this.data.format(dataFormato); }
+    public String getDataAsString() {
+        return this.data.format(dataFormato);
+    }
+
+    public String getDescricao() {
+        return this.descricao;
+    }
+
+    public Funcionario getFuncionario() {
+        return this.funcionario;
+    }
 
     @Override
     public String toString() {
-        return String.format("Categoria: %s | Custo: R$%s | Departamento: %s | Data de Criacao: %s",
+        return String.format(
+                "Descricao: %s | Categoria: %s | Custo: R$%s | Departamento: %s | Data de Criacao: %s | Funcionario: %s",
+                this.descricao,
                 this.categoria,
                 this.custo,
                 this.departamentoAssociado.getNome(),
-                this.data.format(dataFormato));
+                this.data.format(dataFormato),
+                this.funcionario.getNome());
     }
 
     /* Implementei Comparable pra poder dar sort por data */
