@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.math.BigDecimal;
@@ -15,6 +16,67 @@ public class GerenciadorCustos {
 
     }
 
+    public String rankingFuncionarios() {
+        ArrayList<Funcionario> funcionarios = new ArrayList<>();
+        ArrayList<BigDecimal> totais = new ArrayList<>();
+
+        // Junta os custos de cada funcionário
+        for (Custo c : custos) {
+            Funcionario funcionario = c.getFuncionario();
+            BigDecimal valor = c.getCusto();
+
+            int indice = funcionarios.indexOf(funcionario);
+
+            if (indice == -1) {
+                funcionarios.add(funcionario);
+                totais.add(valor);
+            } else {
+                BigDecimal totalAtual = totais.get(indice);
+                totais.set(indice, totalAtual.add(valor));
+            }
+        }
+
+        // Marca quais funcionários já entraram no ranking
+        ArrayList<Boolean> usados = new ArrayList<>();
+
+        for (int i = 0; i < funcionarios.size(); i++) {
+        usados.add(false);
+        }
+
+        StringBuilder ranking = new StringBuilder();
+
+        int limite = Math.min(3, funcionarios.size());
+
+        // Encontra os 3 maiores
+        for (int posicao = 1; posicao <= limite; posicao++) {
+            int maiorIndice = -1;
+
+            for (int i = 0; i < funcionarios.size(); i++) {
+                if (!usados.get(i)) {
+                    if (maiorIndice == -1 ||
+                        totais.get(i).compareTo(totais.get(maiorIndice)) > 0) {
+                        maiorIndice = i;
+                    }
+                }
+            }
+
+            usados.set(maiorIndice, true);
+
+            ranking.append(posicao)
+                 .append("º - ")
+                 .append(funcionarios.get(maiorIndice).getNome())
+                 .append(" - R$ ")
+                 .append(totais.get(maiorIndice))
+                 .append("\n");
+        }
+
+        if (ranking.length() == 0) {
+            return "Nenhum custo registrado.";
+        }
+
+        return ranking.toString();
+    }
+
     //Pesquisa os custos por Descrição - S05T05
     public ArrayList<Custo> pesquisaPorDescricao(String descricao){
         ArrayList<Custo> custos = new ArrayList<>();
@@ -27,7 +89,6 @@ public class GerenciadorCustos {
 
         return custos;
     }
-
     //Pesquisa custos por Departamento - S05T08
     public ArrayList<Custo> pesquisaPorDepartamento(String departamento){
         ArrayList<Custo> custos = new ArrayList<>();
@@ -111,7 +172,7 @@ public class GerenciadorCustos {
             return false;
         }
     }
-
+    
     public BigDecimal totalDoDepartamento(Departamento departamento) {
         BigDecimal total = BigDecimal.ZERO;
 
@@ -145,5 +206,3 @@ public class GerenciadorCustos {
         return ranking;
     }
 }
-
-
