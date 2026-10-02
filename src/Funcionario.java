@@ -22,22 +22,17 @@ public class Funcionario {
     public Departamento getDepartamento(){
         return this.departamento;
     }
-
-    /**
-     * Exibe a lista de funcionários cadastrados no console.
-     * @param funcionarios Lista de funcionários a ser exibida.
-     * @throws IllegalArgumentException Se a lista for nula ou estiver vazia.
-     */
+    
     public static void listarFuncionarios(List<Funcionario> funcionarios) {
         if (funcionarios == null || funcionarios.isEmpty()) {
             throw new IllegalArgumentException("Nenhum funcionário cadastrado para exibição.");
         }
 
-        System.out.println("\n=== LISTA DE FUNCIONÁRIOS ===");
+        System.out.println("\n-------LISTA DE FUNCIONÁRIOS-------");
         for (int i = 0; i < funcionarios.size(); i++) {
             System.out.println((i + 1) + ". " + funcionarios.get(i));
         }
-        System.out.println("=============================\n");
+        System.out.println("------------------------------\n");
     }
 
     @Override
