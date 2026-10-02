@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class Funcionario {
     private String nome;
     private String matricula;
@@ -19,6 +21,18 @@ public class Funcionario {
 
     public Departamento getDepartamento(){
         return this.departamento;
+    }
+    
+    public static void listarFuncionarios(List<Funcionario> funcionarios) {
+        if (funcionarios == null || funcionarios.isEmpty()) {
+            throw new IllegalArgumentException("Nenhum funcionário cadastrado para exibição.");
+        }
+
+        System.out.println("\n-------LISTA DE FUNCIONÁRIOS-------");
+        for (int i = 0; i < funcionarios.size(); i++) {
+            System.out.println((i + 1) + ". " + funcionarios.get(i));
+        }
+        System.out.println("------------------------------\n");
     }
 
     @Override
