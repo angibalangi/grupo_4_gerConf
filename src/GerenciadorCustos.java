@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.math.BigDecimal;
 
 public class GerenciadorCustos {
     private ArrayList<Custo> custos;
@@ -13,13 +14,13 @@ public class GerenciadorCustos {
         custos.add(c);
 
     }
-    
+
     //Pesquisa os custos por Descrição - S05T05
     public ArrayList<Custo> pesquisaPorDescricao(String descricao){
         ArrayList<Custo> custos = new ArrayList<>();
 
         for (Custo c : custos){
-            if (c.getDescricao.equals(descricao)) {
+            if (c.getDescricao().equals(descricao)) {
                 custos.add(c);
             }
         }
@@ -33,10 +34,10 @@ public class GerenciadorCustos {
 
         for (Custo c : custos){
             if (c.getDepartamentoAssociado().equals(departamento)){
-                custos.add(d);
+                custos.add(c);
             }
         }
-        
+
         return custos;
     }
     /* Metodo abaixo so aceita datas no formato dd/MM/yyyy, senao nao vai funcionar!! (data incompleta tbm funciona) */
@@ -86,4 +87,39 @@ public class GerenciadorCustos {
             return false;
         }
     }
+
+    public BigDecimal totalDoDepartamento(Departamento departamento) {
+        BigDecimal total = BigDecimal.ZERO;
+
+        for (Custo c : custos) {
+            if (c.getDepartamentoAssociado() == departamento) {
+                total = total.add(c.getCusto());
+            }
+        }
+
+        return total;
+    }
+
+    public ArrayList<Departamento> rankingDepartamentos(ArrayList<Departamento> departamentos) {
+        ArrayList<Departamento> ranking = new ArrayList<>(departamentos);
+
+        for (int i = 0; i < ranking.size(); i++) {
+            int maior = i;
+
+            for (int j = i + 1; j < ranking.size(); j++) {
+                if (totalDoDepartamento(ranking.get(j))
+                        .compareTo(totalDoDepartamento(ranking.get(maior))) > 0) {
+                    maior = j;
+                }
+            }
+
+            Departamento aux = ranking.get(i);
+            ranking.set(i, ranking.get(maior));
+            ranking.set(maior, aux);
+        }
+
+        return ranking;
+    }
 }
+
+
