@@ -54,6 +54,30 @@ public class GerenciadorCustos {
         return custosEncontrados;
     }
 
+    public ArrayList<Custo> pesquisaPorValorMinimo(BigDecimal valorMinimo){
+        ArrayList<Custo> custosEncontrados = new ArrayList<>();
+
+        for (Custo c : custos){
+            if (c.getCusto().compareTo(valorMinimo) >= 0){
+                custosEncontrados.add(c);
+            }
+        }
+
+        return custosEncontrados;
+    }
+
+    public ArrayList<Custo> pesquisaPorValorMaximo(BigDecimal valorMaximo){
+        ArrayList<Custo> custosEncontrados = new ArrayList<>();
+
+        for (Custo c : custos){
+            if (c.getCusto().compareTo(valorMaximo) <= 0){
+                custosEncontrados.add(c);
+            }
+        }
+
+        return custosEncontrados;
+    }
+
     public void ordenarPorData(){
         Collections.sort(custos);
     }
