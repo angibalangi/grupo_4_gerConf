@@ -205,4 +205,24 @@ public class GerenciadorCustos {
 
         return ranking;
     }
+    public String listarCustos(){
+    if (custos.isEmpty()) {
+        return "Nenhum custo registrado.";
+    }
+
+    // funciona em uma cópia para não bagunçar a ordem original
+    ArrayList<Custo> copia = new ArrayList<>(custos);
+
+    // o último inserido aparece primeiro
+    Collections.reverse(copia);
+
+    // Ordena por data do mais recente ao mais antigo 
+    Collections.sort(copia, Collections.reverseOrder());
+
+    StringBuilder sb = new StringBuilder();
+    for (Custo c : copia) {
+        sb.append(c).append("\n");
+    }
+    return sb.toString();
+}
 }
