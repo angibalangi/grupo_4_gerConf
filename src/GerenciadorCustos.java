@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.math.BigDecimal;
 
 public class GerenciadorCustos {
     private ArrayList<Custo> custos;
@@ -20,6 +21,30 @@ public class GerenciadorCustos {
 
         for (Custo c : custos){
             if (c.getDataAsString().contains(dataInformada)){
+                custosEncontrados.add(c);
+            }
+        }
+
+        return custosEncontrados;
+    }
+
+    public ArrayList<Custo> pesquisaPorValorMinimo(BigDecimal valorMinimo){
+        ArrayList<Custo> custosEncontrados = new ArrayList<>();
+
+        for (Custo c : custos){
+            if (c.getCusto().compareTo(valorMinimo) >= 0){
+                custosEncontrados.add(c);
+            }
+        }
+
+        return custosEncontrados;
+    }
+
+    public ArrayList<Custo> pesquisaPorValorMaximo(BigDecimal valorMaximo){
+        ArrayList<Custo> custosEncontrados = new ArrayList<>();
+
+        for (Custo c : custos){
+            if (c.getCusto().compareTo(valorMaximo) <= 0){
                 custosEncontrados.add(c);
             }
         }
