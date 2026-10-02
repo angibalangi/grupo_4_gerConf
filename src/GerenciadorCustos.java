@@ -27,6 +27,18 @@ public class GerenciadorCustos {
         return custos;
     }
 
+    //Pesquisa custos por Departamento - S05T08
+    public ArrayList<Custo> pesquisaPorDepartamento(String departamento){
+        ArrayList<Custo> custos = new ArrayList<>();
+
+        for (Custo c : custos){
+            if (c.getDepartamentoAssociado().equals(departamento)){
+                custos.add(d);
+            }
+        }
+        
+        return custos;
+    }
     /* Metodo abaixo so aceita datas no formato dd/MM/yyyy, senao nao vai funcionar!! (data incompleta tbm funciona) */
 
     public ArrayList<Custo> pesquisaPorData(String dataInformada){
