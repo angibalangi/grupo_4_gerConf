@@ -25,7 +25,7 @@ public class GerenciadorDepartamentos {
         for (int i = 0; i < this.departamentos.size(); i++) {
             sb.append(i + 1)
               .append(" - ")
-              .append(this.departamentos.get(i))
+              .append(this.departamentos.get(i).getNome())
               .append("\n");
         }
 
