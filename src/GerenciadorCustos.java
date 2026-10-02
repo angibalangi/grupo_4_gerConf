@@ -42,4 +42,22 @@ public class GerenciadorCustos {
 
         return sb.toString();
     }
+
+    public boolean excluirUltimoCusto(Custo custo) {
+        if (custos.size() == 0) {
+            return false;
+        }
+        Custo maisRecente = custos.get(0);
+        for (Custo c : custos) {
+            if (!c.getData().isBefore(maisRecente.getData())) {
+                maisRecente = c;
+            }
+        }
+        if (custo == maisRecente) {
+            custos.remove(custo);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
