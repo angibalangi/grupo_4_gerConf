@@ -106,5 +106,9 @@ public class Main{
         gerenciador.adicionarCusto(CategoriaCusto.OUTROS_SERVICOS, vendas, "350.00", d2MesesAtras, "Passagens de Viagem", f5);
         gerenciador.adicionarCusto(CategoriaCusto.AQUISICAO_DE_BENS, rh, "950.00", d5MesesAtras, "Cadeira Ergonômica", f2);
 
+
+        System.out.println("\n------- RANKING DE FUNCIONÁRIOS -------");
+        System.out.println(gerenciador.rankingFuncionarios());
+
     }
 }
