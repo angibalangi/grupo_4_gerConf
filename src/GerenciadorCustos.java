@@ -1,6 +1,6 @@
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.math.BigDecimal;
 
 public class GerenciadorCustos {
     private ArrayList<Custo> custos;
@@ -13,6 +13,67 @@ public class GerenciadorCustos {
         Custo c = new Custo(categoria, departamentoAssociado, custo, data, descricao, funcionario);
         custos.add(c);
 
+    }
+
+    public String rankingFuncionarios() {
+        ArrayList<Funcionario> funcionarios = new ArrayList<>();
+        ArrayList<BigDecimal> totais = new ArrayList<>();
+
+        // Junta os custos de cada funcionário
+        for (Custo c : custos) {
+            Funcionario funcionario = c.getFuncionario();
+            BigDecimal valor = c.getCusto();
+
+            int indice = funcionarios.indexOf(funcionario);
+
+            if (indice == -1) {
+                funcionarios.add(funcionario);
+                totais.add(valor);
+            } else {
+                BigDecimal totalAtual = totais.get(indice);
+                totais.set(indice, totalAtual.add(valor));
+            }
+        }
+
+        // Marca quais funcionários já entraram no ranking
+        ArrayList<Boolean> usados = new ArrayList<>();
+
+        for (int i = 0; i < funcionarios.size(); i++) {
+            usados.add(false);
+        }
+
+        StringBuilder ranking = new StringBuilder();
+
+        int limite = Math.min(3, funcionarios.size());
+
+        // Encontra os 3 maiores
+        for (int posicao = 1; posicao <= limite; posicao++) {
+            int maiorIndice = -1;
+
+            for (int i = 0; i < funcionarios.size(); i++) {
+                if (!usados.get(i)) {
+                    if (maiorIndice == -1 ||
+                            totais.get(i).compareTo(totais.get(maiorIndice)) > 0) {
+                        maiorIndice = i;
+                    }
+                }
+            }
+
+            usados.set(maiorIndice, true);
+
+            ranking.append(posicao)
+                    .append("º - ")
+                    .append(funcionarios.get(maiorIndice).getNome())
+                    .append(" - R$ ")
+                    .append(totais.get(maiorIndice))
+                    .append("\n");
+        }
+
+        if (ranking.length() == 0) {
+            return "Nenhum custo registrado.";
+        }
+
+        return ranking.toString();
     }
 
     //Pesquisa os custos por Descrição - S05T05
@@ -33,7 +94,7 @@ public class GerenciadorCustos {
         ArrayList<Custo> custos = new ArrayList<>();
 
         for (Custo c : custos){
-            if (c.getDepartamentoAssociado().equals(departamento)){
+            if (c.getDepartamentoAssociado().getNome().equals(departamento)){
                 custos.add(c);
             }
         }
@@ -94,6 +155,7 @@ public class GerenciadorCustos {
         return sb.toString();
     }
 
+    //Exclusão do custo passado por parâmetro se ele for o mais recente.
     public boolean excluirUltimoCusto(Custo custo) {
         if (custos.size() == 0) {
             return false;
@@ -144,6 +206,24 @@ public class GerenciadorCustos {
 
         return ranking;
     }
+    public String listarCustos(){
+        if (custos.isEmpty()) {
+            return "Nenhum custo registrado.";
+        }
+
+        // funciona em uma cópia para não bagunçar a ordem original
+        ArrayList<Custo> copia = new ArrayList<>(custos);
+
+        // o último inserido aparece primeiro
+        Collections.reverse(copia);
+
+        // Ordena por data do mais recente ao mais antigo
+        Collections.sort(copia, Collections.reverseOrder());
+
+        StringBuilder sb = new StringBuilder();
+        for (Custo c : copia) {
+            sb.append(c).append("\n");
+        }
+        return sb.toString();
+    }
 }
-
-
