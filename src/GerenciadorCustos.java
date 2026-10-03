@@ -89,6 +89,7 @@ public class GerenciadorCustos {
 
         return custos;
     }
+
     //Pesquisa custos por Departamento - S05T08
     public ArrayList<Custo> pesquisaPorDepartamento(String departamento){
         ArrayList<Custo> custos = new ArrayList<>();
@@ -155,6 +156,7 @@ public class GerenciadorCustos {
         return sb.toString();
     }
 
+    //Exclusão do custo passado por parâmetro se ele for o mais recente.
     public boolean excluirUltimoCusto(Custo custo) {
         if (custos.size() == 0) {
             return false;

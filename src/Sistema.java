@@ -32,22 +32,23 @@ public class Sistema {
 
         int opcao;
 
-try {
-    opcao = Integer.parseInt(scanner.nextLine());
-} catch (NumberFormatException e) {
-    System.out.println("Opção inválida.");
-    return;
-}
-
-        if (opcao < 1 || opcao > funcionarios.size()) {
+        try {
+            opcao = Integer.parseInt(scanner.nextLine());
+            
+        } catch (NumberFormatException e) {
             System.out.println("Opção inválida.");
             return;
         }
 
-        this.funcionarioAtual = funcionarios.get(opcao - 1);
+                if (opcao < 1 || opcao > funcionarios.size()) {
+                    System.out.println("Opção inválida.");
+                    return;
+                }
 
-        System.out.println("Funcionário selecionado: " + funcionarioAtual.getNome());
-    }
+                this.funcionarioAtual = funcionarios.get(opcao - 1);
+
+                System.out.println("Funcionário selecionado: " + funcionarioAtual.getNome());
+            }
 
     public Funcionario getFuncionarioAtual() {
         return this.funcionarioAtual;
