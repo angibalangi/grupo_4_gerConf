@@ -48,6 +48,22 @@ public class Main{
         funcionarios.add(f9);
         funcionarios.add(f10);
 
+        // adicionando os funcionários aos seus respectivos departamentos
+        rh.getFuncionarios().add(f1);
+        rh.getFuncionarios().add(f2);
+
+        compras.getFuncionarios().add(f3);
+
+        vendas.getFuncionarios().add(f4);
+        vendas.getFuncionarios().add(f5);
+
+        expedicao.getFuncionarios().add(f6);
+
+        engenharia.getFuncionarios().add(f7);
+        engenharia.getFuncionarios().add(f8);
+
+        producao.getFuncionarios().add(f9);
+        producao.getFuncionarios().add(f10);
 
         LocalDate hoje = LocalDate.now();
         String dHoje = hoje.format(fmt);                         // data maxima
