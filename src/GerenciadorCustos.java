@@ -1,7 +1,6 @@
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.math.BigDecimal;
 
 public class GerenciadorCustos {
     private ArrayList<Custo> custos;
@@ -89,12 +88,13 @@ public class GerenciadorCustos {
 
         return custos;
     }
+
     //Pesquisa custos por Departamento - S05T08
     public ArrayList<Custo> pesquisaPorDepartamento(String departamento){
         ArrayList<Custo> custos = new ArrayList<>();
 
         for (Custo c : custos){
-            if (c.getDepartamentoAssociado().equals(departamento)){
+            if (c.getDepartamentoAssociado().getNome().equals(departamento)){
                 custos.add(c);
             }
         }
@@ -155,6 +155,7 @@ public class GerenciadorCustos {
         return sb.toString();
     }
 
+    //Exclusão do custo passado por parâmetro se ele for o mais recente.
     public boolean excluirUltimoCusto(Custo custo) {
         if (custos.size() == 0) {
             return false;
