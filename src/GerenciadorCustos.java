@@ -1,7 +1,6 @@
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.math.BigDecimal;
 
 public class GerenciadorCustos {
     private ArrayList<Custo> custos;
@@ -95,7 +94,7 @@ public class GerenciadorCustos {
         ArrayList<Custo> custos = new ArrayList<>();
 
         for (Custo c : custos){
-            if (c.getDepartamentoAssociado().equals(departamento)){
+            if (c.getDepartamentoAssociado().getNome().equals(departamento)){
                 custos.add(c);
             }
         }
